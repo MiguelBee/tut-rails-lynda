@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_213611) do
+ActiveRecord::Schema.define(version: 2019_12_31_052841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_213611) do
   create_table "pages", force: :cascade do |t|
     t.integer "subject_id"
     t.string "name"
-    t.integer "permalink"
+    t.string "permalink"
     t.integer "position"
     t.boolean "visible", default: false
     t.datetime "created_at", null: false
@@ -58,9 +58,10 @@ ActiveRecord::Schema.define(version: 2019_12_26_213611) do
     t.string "name"
     t.integer "position"
     t.boolean "visible"
-    t.text "content_type"
+    t.string "content_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content"
     t.index ["page_id"], name: "index_sections_on_page_id"
   end
 

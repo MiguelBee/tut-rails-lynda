@@ -1,0 +1,19 @@
+<%= link_to("<< Back to List", page_path, class: 'back-link') %>
+
+<div class="subjects delete">
+	<h2>Delete Section</h2>
+
+	<%= form_for(@section, method: 'delete') do |f| %>
+
+		<p>Are you sure you want to permanently delete this page?</p>
+
+		<!--"object" is the same thing as what instance varible is given to the form -->
+		<p class="reference-name"><%= f.object.name %></p>
+
+		<div class="form-buttons">
+			<%= f.submit("Delete Section") %>
+		</div>
+
+	<% end %>
+
+</div>
