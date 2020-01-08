@@ -7,6 +7,8 @@ class SectionsController < ApplicationController
   end
 
   def new
+    @section_count = Section.count + 1
+    @pages = Page.sorted
     @section = Section.new
   end
 
@@ -20,11 +22,15 @@ class SectionsController < ApplicationController
       flash[:notice] = "Your section has been saved"
       redirect_to sections_path
     else
+      @section_count = Section.count + 1
+      @pages = Page.sorted
       render("new")
     end
   end
 
   def edit
+    @section_count = Section.count
+    @pages = Page.sorted
     @section = Section.find(params[:id])
   end
 
@@ -34,6 +40,8 @@ class SectionsController < ApplicationController
       flash[:notice] = "Your section has been updated"
       redirect_to section_path(@section)
     else
+      @section_count = Section.count
+      @pages = Page.sorted
       render("edit")
     end
   end
