@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   
   layout 'admin'
   
+  before_action :find_subjects, only: [:update, :edit, :new, :create]
+  before_action :set_page_count, only: [:new, :create, :edit, :update]
+
   def index
     @pages = Page.sorted
   end
@@ -11,8 +14,6 @@ class PagesController < ApplicationController
   end
 
   def new
-    @page_count = Page.count + 1
-    @subjects = Subject.sorted
     @page = Page.new
   end
 
@@ -22,15 +23,11 @@ class PagesController < ApplicationController
       flash[:notice] = "You have successfully created a Page"
       redirect_to pages_path
     else
-      @page_count = Page.count + 1
-      @subjects = Subject.sorted
       render("new")
     end
   end
 
   def edit
-    @page_count = Page.count
-    @subjects = Subject.sorted
     @page = Page.find(params[:id])
   end
 
@@ -40,8 +37,6 @@ class PagesController < ApplicationController
       flash[:notice] = "Your page updated successfully"
       redirect_to page_path(@page)
     else
-      @page_count = Page.count
-      @subjects = Subject.sorted
       render("edit")
     end
   end
@@ -58,6 +53,17 @@ class PagesController < ApplicationController
   end
 
 private
+
+  def set_page_count
+    @page_count = Page.count
+    if params[:action] == 'new' || params[:actoin] == 'create'
+      @page_count += 1
+    end
+  end
+
+  def find_subjects
+    @subjects = Subject.sorted
+  end
 
   def page_params
     params.require(:page).permit(:subject_id, :permalink, :name, :position, :visible)
