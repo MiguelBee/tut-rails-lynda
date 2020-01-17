@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
+  root 'demo#index'
 
+  #match routes
+  get 'admin', to: 'access#menu'
+  get 'access/menu'
+  get 'access/login'
+  post 'access/attempt_login'
+  get 'access/logout'
+  
   resources :pages do
     member do
       get :delete

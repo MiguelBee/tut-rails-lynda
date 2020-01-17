@@ -5,6 +5,8 @@ class AdminUser < ApplicationRecord
 	#this is users if the class name was still users and we wanted to use another table
 	#self.table_name  = "admin_users"
 
+	has_secure_password
+
 	EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/i
 	FORBIDDEN_USERNAMES = ['littlebobebop', 'humptydumpty', 'marymary']
 	#sexy validations
