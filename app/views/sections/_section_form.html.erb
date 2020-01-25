@@ -1,3 +1,5 @@
+<%= error_messages_for(f.object) %>
+
 <table summary="Subject form fields">
   <tr>
     <th>Name</th>
@@ -5,7 +7,7 @@
   </tr>
   <tr>
     <th>Page</th>
-    <td><%= f.select(:page_id, @pages.map{|p| [p.name, p.id]}) %></td>
+    <td><%= @page.name %></td>
   </tr>
   <tr>
     <th>Content Type</th>

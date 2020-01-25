@@ -2,6 +2,7 @@ class AdminUser < ApplicationRecord
 	has_and_belongs_to_many :pages
 	has_many :section_edits
 	has_many :sections, :through => :section_edits
+	scope :sorted, lambda{order("last_name ASC, first_name ASC")}
 	#this is users if the class name was still users and we wanted to use another table
 	#self.table_name  = "admin_users"
 
@@ -14,6 +15,7 @@ class AdminUser < ApplicationRecord
 	validates :last_name, presence: true, length: {maximum: 50}
 	validates :username, length: {within: 8..25}, uniqueness: true
 	validates :email, presence: true, length: {maximum: 100}, format: EMAIL_REGEX, confirmation: true
+
 
 	# sexy validations
 	
@@ -35,6 +37,10 @@ class AdminUser < ApplicationRecord
   validates_format_of :email, :with => EMAIL_REGEX
   validates_confirmation_of :email
 =end
+
+def full_name
+	"#{first_name} #{last_name}"
+end
 
 private
 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'demo#index'
+
+  root 'public#index'
 
   #match routes
   get 'admin', to: 'access#menu'
@@ -7,7 +8,15 @@ Rails.application.routes.draw do
   get 'access/login'
   post 'access/attempt_login'
   get 'access/logout'
+
+  # "to" is to what controller and what action, "as" is the prefix in rails routes
+  get 'show/:permalink', to: 'public#show', as: "public_show"
   
+  resources :admin_users, except: [:show] do
+    member do
+      get :delete
+    end
+  end
   resources :pages do
     member do
       get :delete

@@ -3,6 +3,8 @@ class Section < ApplicationRecord
 	has_many :section_edits
 	has_many :admin_users, :through => :section_edits
 
+	acts_as_list scope: :subject
+
 	scope :visible, lambda {where(visible: true)}
 	scope :invisible, lambda {where(visible: false)}
 	scope :sorted, lambda {order("position ASC")}
